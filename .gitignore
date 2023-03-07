@@ -1,0 +1,21 @@
+/build
+/node_modules
+package-lock.json
+/build
+.eslintcache
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+.env
+.jpg
+.png
+.jpeg
+.svg
+.avi
+.mp3
+.mp4
