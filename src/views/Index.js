@@ -57,32 +57,32 @@ const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
   const [chartExample1Data, setChartExample1Data] = useState("data1");
 
-  const test=[{
-    "time":`${new Date()}`,
-    "content":"여기가 텍스트 영역입니다.",
-    "picsrc":["para.png"],
-    "title":"제목"
+  const test = [{
+    "time": `${new Date()}`,
+    "content": "여기가 텍스트 영역입니다.",
+    "picsrc": ["para.png"],
+    "title": "제목"
   },
   {
-    "time":`${new Date()}`,
-    "content":"여기가 텍스트 영역입니다.",
-    "picsrc":["city-removebg-preview.png"],
-    "title":"제목"
+    "time": `${new Date()}`,
+    "content": "여기가 텍스트 영역입니다.",
+    "picsrc": ["city-removebg-preview.png"],
+    "title": "제목"
   }
-  ,{
-    "time":`${new Date()}`,
-    "content":"여기가 텍스트 영역입니다.",
-    "picsrc":["dotart.gif"],
-    "title":"제목"
+    , {
+    "time": `${new Date()}`,
+    "content": "여기가 텍스트 영역입니다.",
+    "picsrc": ["dotart.gif"],
+    "title": "제목"
   }
-  ,{
-    "time":`${new Date()}`,
-    "content":"여기가 텍스트 영역입니다.",
-    "picsrc":["ab.jpg","bc.jpg"],
-    "title":"제목"
+    , {
+    "time": `${new Date()}`,
+    "content": "여기가 텍스트 영역입니다.",
+    "picsrc": ["ab.jpg", "bc.jpg"],
+    "title": "제목"
   }
 
-]
+  ]
 
   if (window.Chart) {
     parseOptions(Chart, chartOptions());
@@ -98,73 +98,47 @@ const Index = (props) => {
       <Header />
       {/* Page content */}
       <Container className="mt--7 " fluid>
-        {test.map((row,key)=>{
-          if(row.picsrc.length>2){
-            console.log("2개 뽑기")
-          }
-          console.log(row)
-          return(
-          <Row>
-            <Col className="mb-5 mb-xl-0 " xl="6"> {/*이거 크기 조절인데 어케할지 생각해보자 크게크게해서 안에 이미지를 줄이는게 낫나 아니면 보통사이즈로해서 최대한 덜 쪼개지게 하는게 맞나*/}
-              <Card className="my-2 shadow">
-                <CardImg
-                  alt="Card image cap"
-                  src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${row.picsrc[0]}`}
-                  style={{
-                    width: '100%',
-                  }}
-                />
-                <CardBody>
-                  <CardTitle tag="h5">
-                    Card Title
-                    {row.title}
-                  </CardTitle>
-                  <CardText>
-                    {row.content}
-                  </CardText>
-                  <CardText>
-                    <small className="text-muted">
-                      {row.time}
-                    </small>
-                  </CardText>
-                <i  className="ni ni-favourite-28 hoverEffect"></i>
-
-                </CardBody>
-
-              </Card>
-            </Col>
-          </Row>
-        )
-        })}
         <Row>
-          <Col className="mb-5 mb-xl-0 " xl="8">
-            <Card className="my-2 shadow">
-              <CardImg
-                alt="Card image cap"
-                src="https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/mybg.jpg"
-                style={{
-                  width: '100%',
-                  height: "100%",
-                }}
-            
-              />
-              <CardBody>
-                <CardTitle tag="h5">
-                  Card Title
-                </CardTitle>
-                <CardText>
-                  This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                </CardText>
-                <CardText>
-                  <small className="text-muted">
-                    Last updated 3 mins ago
-                  </small>
-                </CardText>
-              </CardBody>
-            </Card>
+          <Col xl="10">
+            {test.map((row, key) => {
+              if (row.picsrc.length > 2) {
+                console.log("2개 뽑기")
+              }
+              console.log(row)
+              return (
+                <Col className="mb-5 mb-xl-0 " xl="12"> {/*이거 크기 조절인데 어케할지 생각해보자 크게크게해서 안에 이미지를 줄이는게 낫나 아니면 보통사이즈로해서 최대한 덜 쪼개지게 하는게 맞나*/}
+                  <Card className="my-2 shadow">
+                    <CardImg
+                      alt="Card image cap"
+                      src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${row.picsrc[0]}`}
+                      style={{
+                        width: '100%',
+                      }}
+                    />
+                    <CardBody>
+                      <CardTitle tag="h5">
+                        Card Title
+                        {row.title}
+                      </CardTitle>
+                      <CardText>
+                        {row.content}
+                      </CardText>
+                      <CardText>
+                        <small className="text-muted">
+                          {row.time}
+                        </small>
+                      </CardText>
+                      <i className="ni ni-favourite-28 hoverEffect"></i>
+                    </CardBody>
+                  </Card>
+                </Col>
+              )
+            })}
+          </Col>
+          <Col xl="2">
+            asdasd
           </Col>
         </Row>
-       
 
 
 
@@ -182,7 +156,8 @@ const Index = (props) => {
 
 
 
-{/* 
+
+        {/* 
 
         <Row>
           <Col className="mb-5 mb-xl-0 " xl="8">

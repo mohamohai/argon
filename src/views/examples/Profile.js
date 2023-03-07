@@ -37,60 +37,60 @@ import { useEffect, useState, useMemo } from "react";
 
 
 const Profile = () => {
-  const [userData,setuserData]=useState([])
-  const [userDataHit, setuserDataHit]=useState(false)
+  const [userData, setuserData] = useState([])
+  const [userDataHit, setuserDataHit] = useState(false)
 
-  const [password,setpassword]=useState("");
-  const [password2,setpassword2]=useState("0");
-  const [passwordcheck,setpasswordcheck]=useState(false)
+  const [password, setpassword] = useState("");
+  const [password2, setpassword2] = useState("0");
+  const [passwordcheck, setpasswordcheck] = useState(false)
 
-  useEffect(()=>{
-    console.log("패스워드변환중",password," + ",password2)
-    
-    if(password===password2)
+  useEffect(() => {
+    console.log("패스워드변환중", password, " + ", password2)
+
+    if (password === password2)
       setpasswordcheck(true);
-    else{
+    else {
       setpasswordcheck(false);
     }
-  },[password,password2])
+  }, [password, password2])
 
-const test = [{
-  "name":"이종현",
-  "myex":"이 구역이 뭘 넣어야 할 지 몰라서 빼자니 너무 비어보이고 뭘 넣자니 대충 인삿말은 위에 있고 해서 본인에 대한 간략한 소개글 같은걸 일단 넣어놓자",
-  "profilepic":"ab.jpg",
-  "profileback":"bc.jpg",
-  "id":"ahwjs1022",
-  "password":"asdasd",
-  "phone":"01015151515",
-  "age":"28",
-  "friend":["accont","bvbbdd","토토로"],
-  "write":["나는가끔눈물을흘린다","오늘 저녁은 짜파게티야"],
-  "statusmessage":"i.....want......coffee...",
-  "like":"120",
-  "interest":["해시태그용","요리","밥","한식","일식","게임","버튜버","만화","가렌","말자하","갈리오"]
-}]
+  const test = [{
+    "name": "이종현",
+    "myex": "이 구역이 뭘 넣어야 할 지 몰라서 빼자니 너무 비어보이고 뭘 넣자니 대충 인삿말은 위에 있고 해서 본인에 대한 간략한 소개글 같은걸 일단 넣어놓자",
+    "profilepic": "ab.jpg",
+    "profileback": "bc.jpg",
+    "id": "ahwjs1022",
+    "password": "asdasd",
+    "phone": "01015151515",
+    "age": "28",
+    "friend": ["accont", "bvbbdd", "토토로"],
+    "write": ["나는가끔눈물을흘린다", "오늘 저녁은 짜파게티야"],
+    "statusmessage": "i.....want......coffee...",
+    "like": "120",
+    "interest": ["해시태그용", "요리", "밥", "한식", "일식", "게임", "버튜버", "만화", "가렌", "말자하", "갈리오"]
+  }]
 
 
-const test2 = [{
-  "name":"루피",
-  "myex":"스포일러 조심",
-  "profilepic":"cd.jpg",
-  "profileback":"para.png",
-  "id":"nika11",
-  "password":"zxczxc",
-  "phone":"0101584545",
-  "age":"20",
-  "friend":["조로","상디","나미","크로커다일"],
-  "write":["총난타","쵸파"],
-  "statusmessage":"배고파",
-  "like":"180", //여긴 나중에 데이터 받는걸로 치고
-  "interest":["쵸파","크로커다일","로빈","샹크스","도플라밍고",]
-}]
+  const test2 = [{
+    "name": "루피",
+    "myex": "스포일러 조심",
+    "profilepic": "cd.jpg",
+    "profileback": "para.png",
+    "id": "nika11",
+    "password": "zxczxc",
+    "phone": "0101584545",
+    "age": "20",
+    "friend": ["조로", "상디", "나미", "크로커다일"],
+    "write": ["총난타", "쵸파"],
+    "statusmessage": "배고파",
+    "like": "180", //여긴 나중에 데이터 받는걸로 치고
+    "interest": ["쵸파", "크로커다일", "로빈", "샹크스", "도플라밍고",]
+  }]
 
-  useEffect(()=>{
-   
-   // console.log(test[0].)
-  },[])
+  useEffect(() => {
+
+    // console.log(test[0].)
+  }, [])
 
   return (
     <>
@@ -103,14 +103,12 @@ const test2 = [{
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
                   <div className="card-profile-image">
-
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <img
                         alt="..."
                         className="rounded-circle"
                         src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${test2[0].profilepic}`}
                       />
-                      
                     </a>
                   </div>
                 </Col>
@@ -134,7 +132,6 @@ const test2 = [{
                     size="sm"
                   >
                     Message
-
                   </Button>
                 </div>
               </CardHeader>
@@ -154,7 +151,7 @@ const test2 = [{
                         <span className="heading">{test2[0].like}</span>
                         <span className="description">Like</span>
                       </div>
-                   
+
                     </div>
                   </div>
                 </Row>
@@ -167,14 +164,14 @@ const test2 = [{
                     <i className="ni location_pin " />
                     {test2[0]["status message"]}
                   </div>
-                  {test2[0].interest.map((row,key)=>{
-                    return(<span className="hashtag"> <a href='#'>#{row}</a></span>)
+                  {test2[0].interest.map((row, key) => {
+                    return (<span className="hashtag"> <a href='#'>#{row}</a></span>)
                   })}
                   <hr className="my-4" />
                   <p>
                     {test2[0].myex}
                   </p>
-               
+
                 </div>
               </CardBody>
             </Card>
@@ -199,39 +196,39 @@ const test2 = [{
                 </Row>
               </CardHeader>
               <CardBody>
-              <h6 className="heading-small text-muted mb-4">About me</h6>
-                  <div className="pl-lg-4">
-                    <FormGroup>
-                      <label>About Me</label>
-                      <Input
-                        className="form-control-alternative"
-                        placeholder={`${test2[0].myex}`}
-                        defaultValue={`${test2[0].myex}`}
-                        rows="4"
-                        type="textarea"
-                      />
-                    </FormGroup>
-                    <Row>
-                      <Col lg="4">
+                <h6 className="heading-small text-muted mb-4">About me</h6>
+                <div className="pl-lg-4">
+                  <FormGroup>
+                    <label>About Me</label>
+                    <Input
+                      className="form-control-alternative"
+                      placeholder={`${test2[0].myex}`}
+                      defaultValue={`${test2[0].myex}`}
+                      rows="4"
+                      type="textarea"
+                    />
+                  </FormGroup>
+                  <Row>
+                    <Col lg="4">
                       <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            상태 메시지
-                          </label>
-                          <Input
-                            className="form-control-alternative"
-                            defaultValue={test2[0].statusmessage}
-                            id="input-address"
-                            placeholder={test2[0].statusmessage}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </div>
-                  <hr className="my-4" />
+                        <label
+                          className="form-control-label"
+                          htmlFor="input-address"
+                        >
+                          상태 메시지
+                        </label>
+                        <Input
+                          className="form-control-alternative"
+                          defaultValue={test2[0].statusmessage}
+                          id="input-address"
+                          placeholder={test2[0].statusmessage}
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </div>
+                <hr className="my-4" />
 
                 <Form>
                   <h6 className="heading-small text-muted mb-4">
@@ -289,7 +286,7 @@ const test2 = [{
                             id="input-first-name"
                             placeholder="비밀번호"
                             type="password"
-                            onChange={(e)=>{setpassword(e.target.value)}}
+                            onChange={(e) => { setpassword(e.target.value) }}
 
                           />
                         </FormGroup>
@@ -307,12 +304,12 @@ const test2 = [{
                             id="input-last-name"
                             placeholder="비밀번호 확인"
                             type="password"
-                            onChange={(e)=>{setpassword2(e.target.value)}}
+                            onChange={(e) => { setpassword2(e.target.value) }}
                           />
                         </FormGroup>
                       </Col>
                       <Col lg="12">
-                        {passwordcheck ? <span style={{color:"green"}}>비밀번호가 일치합니다.</span>:<span style={{color:"red"}}>비밀번호가 일치하지 않습니다.</span>}
+                        {passwordcheck ? <span style={{ color: "green" }}>비밀번호가 일치합니다.</span> : <span style={{ color: "red" }}>비밀번호가 일치하지 않습니다.</span>}
                       </Col>
                     </Row>
                   </div>
@@ -341,7 +338,7 @@ const test2 = [{
                         </FormGroup>
                       </Col>
                     </Row>
-                   
+
                     <Row>
                       <Col lg="4">
                         <FormGroup>
@@ -395,14 +392,14 @@ const test2 = [{
                       </Col>
                     </Row>
                   </div>
-          
+
                   {/* Description */}
-                
+
                 </Form>
               </CardBody>
             </Card>
           </Col>
-     
+
         </Row>
       </Container>
     </>
