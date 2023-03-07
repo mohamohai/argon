@@ -60,25 +60,25 @@ const Index = (props) => {
   const test=[{
     "time":`${new Date()}`,
     "content":"여기가 텍스트 영역입니다.",
-    "picsrc":"para.png",
+    "picsrc":["para.png"],
     "title":"제목"
   },
   {
     "time":`${new Date()}`,
     "content":"여기가 텍스트 영역입니다.",
-    "picsrc":"city-removebg-preview.png",
+    "picsrc":["city-removebg-preview.png"],
     "title":"제목"
   }
   ,{
     "time":`${new Date()}`,
     "content":"여기가 텍스트 영역입니다.",
-    "picsrc":"dotart.gif",
+    "picsrc":["dotart.gif"],
     "title":"제목"
   }
   ,{
     "time":`${new Date()}`,
     "content":"여기가 텍스트 영역입니다.",
-    "picsrc":"mybg.jpg",
+    "picsrc":["ab.jpg","bc.jpg"],
     "title":"제목"
   }
 
@@ -98,17 +98,19 @@ const Index = (props) => {
       <Header />
       {/* Page content */}
       <Container className="mt--7 " fluid>
-
         {test.map((row,key)=>{
+          if(row.picsrc.length>2){
+            console.log("2개 뽑기")
+          }
+          console.log(row)
           return(
           <Row>
-            <Col className="mb-5 mb-xl-0 " xl="12">
+            <Col className="mb-5 mb-xl-0 " xl="6"> {/*이거 크기 조절인데 어케할지 생각해보자 크게크게해서 안에 이미지를 줄이는게 낫나 아니면 보통사이즈로해서 최대한 덜 쪼개지게 하는게 맞나*/}
               <Card className="my-2 shadow">
                 <CardImg
                   alt="Card image cap"
-                  src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${row.picsrc}`}
+                  src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${row.picsrc[0]}`}
                   style={{
-                    height: "90%",
                     width: '100%',
                   }}
                 />
