@@ -22,12 +22,17 @@ import classnames from "classnames";
 import Chart from "chart.js";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
+
+import './pop.css'
 // reactstrap components
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
+  CardImg,
+  CardTitle,
+  CardText,
   NavItem,
   NavLink,
   Nav,
@@ -52,6 +57,33 @@ const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
   const [chartExample1Data, setChartExample1Data] = useState("data1");
 
+  const test=[{
+    "time":`${new Date()}`,
+    "content":"여기가 텍스트 영역입니다.",
+    "picsrc":"para.png",
+    "title":"제목"
+  },
+  {
+    "time":`${new Date()}`,
+    "content":"여기가 텍스트 영역입니다.",
+    "picsrc":"city-removebg-preview.png",
+    "title":"제목"
+  }
+  ,{
+    "time":`${new Date()}`,
+    "content":"여기가 텍스트 영역입니다.",
+    "picsrc":"dotart.gif",
+    "title":"제목"
+  }
+  ,{
+    "time":`${new Date()}`,
+    "content":"여기가 텍스트 영역입니다.",
+    "picsrc":"mybg.jpg",
+    "title":"제목"
+  }
+
+]
+
   if (window.Chart) {
     parseOptions(Chart, chartOptions());
   }
@@ -66,9 +98,90 @@ const Index = (props) => {
       <Header />
       {/* Page content */}
       <Container className="mt--7 " fluid>
+
+        {test.map((row,key)=>{
+          return(
+          <Row>
+            <Col className="mb-5 mb-xl-0 " xl="12">
+              <Card className="my-2 shadow">
+                <CardImg
+                  alt="Card image cap"
+                  src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${row.picsrc}`}
+                  style={{
+                    height: "90%",
+                    width: '100%',
+                  }}
+                />
+                <CardBody>
+                  <CardTitle tag="h5">
+                    Card Title
+                    {row.title}
+                  </CardTitle>
+                  <CardText>
+                    {row.content}
+                  </CardText>
+                  <CardText>
+                    <small className="text-muted">
+                      {row.time}
+                    </small>
+                  </CardText>
+                <i  className="ni ni-favourite-28 hoverEffect"></i>
+
+                </CardBody>
+
+              </Card>
+            </Col>
+          </Row>
+        )
+        })}
         <Row>
-          <Col className="mb-5 mb-xl-0 " xl="8">asd</Col>
+          <Col className="mb-5 mb-xl-0 " xl="8">
+            <Card className="my-2 shadow">
+              <CardImg
+                alt="Card image cap"
+                src="https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/mybg.jpg"
+                style={{
+                  width: '100%',
+                  height: "100%",
+                }}
+            
+              />
+              <CardBody>
+                <CardTitle tag="h5">
+                  Card Title
+                </CardTitle>
+                <CardText>
+                  This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                </CardText>
+                <CardText>
+                  <small className="text-muted">
+                    Last updated 3 mins ago
+                  </small>
+                </CardText>
+              </CardBody>
+            </Card>
+          </Col>
         </Row>
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* 
+
         <Row>
           <Col className="mb-5 mb-xl-0 " xl="8">
             <Card className="bg-gradient-default shadow">
@@ -112,7 +225,7 @@ const Index = (props) => {
                 </Row>
               </CardHeader>
               <CardBody>
-                {/* Chart */}
+                Chart
                 <div className="chart">
                   <Line
                     data={chartExample1[chartExample1Data]}
@@ -136,7 +249,7 @@ const Index = (props) => {
                 </Row>
               </CardHeader>
               <CardBody>
-                {/* Chart */}
+                Chart
                 <div className="chart">
                   <Bar
                     data={chartExample2.data}
@@ -332,7 +445,10 @@ const Index = (props) => {
               </Table>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
+
+
+
       </Container>
     </>
   );

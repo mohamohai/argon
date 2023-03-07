@@ -70,14 +70,25 @@ const test = [{
   "interest":["해시태그용","요리","밥","한식","일식","게임","버튜버","만화","가렌","말자하","갈리오"]
 }]
 
+
+const test2 = [{
+  "name":"루피",
+  "myex":"스포일러 조심",
+  "profilepic":"cd.jpg",
+  "profileback":"para.png",
+  "id":"nika11",
+  "password":"zxczxc",
+  "phone":"0101584545",
+  "age":"20",
+  "friend":["조로","상디","나미","크로커다일"],
+  "write":["총난타","쵸파"],
+  "statusmessage":"배고파",
+  "like":"180", //여긴 나중에 데이터 받는걸로 치고
+  "interest":["쵸파","크로커다일","로빈","샹크스","도플라밍고",]
+}]
+
   useEffect(()=>{
-    console.log(test[0].name)
-    console.log(`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${test[0].profilepic}`)
-    console.log(test[0].id)
-    console.log(test[0].password)
-    console.log(test[0].phone)
-    console.log(test[0].age)
-    console.log(test[0].friend)
+   
    // console.log(test[0].)
   },[])
 
@@ -97,7 +108,7 @@ const test = [{
                       <img
                         alt="..."
                         className="rounded-circle"
-                        src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${test[0].profilepic}`}
+                        src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${test2[0].profilepic}`}
                       />
                       
                     </a>
@@ -132,15 +143,15 @@ const test = [{
                   <div className="col">
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                       <div>
-                        <span className="heading">{test[0].friend.length}</span>
+                        <span className="heading">{test2[0].friend.length}</span>
                         <span className="description">Friends</span>
                       </div>
                       <div>
-                        <span className="heading">{test[0].write.length}</span>
+                        <span className="heading">{test2[0].write.length}</span>
                         <span className="description">Post</span>
                       </div>
                       <div>
-                        <span className="heading">{test[0].like}</span>
+                        <span className="heading">{test2[0].like}</span>
                         <span className="description">Like</span>
                       </div>
                    
@@ -149,19 +160,19 @@ const test = [{
                 </Row>
                 <div className="text-center">
                   <h3>
-                    {test[0].name}
-                    <span className="font-weight-light">, {test[0].age}</span>
+                    {test2[0].name}
+                    <span className="font-weight-light">, {test2[0].age}</span>
                   </h3>
                   <div className="h5 font-weight-300">
                     <i className="ni location_pin " />
-                    {test[0]["status message"]}
+                    {test2[0]["status message"]}
                   </div>
-                  {test[0].interest.map((row,key)=>{
+                  {test2[0].interest.map((row,key)=>{
                     return(<span className="hashtag"> <a href='#'>#{row}</a></span>)
                   })}
                   <hr className="my-4" />
                   <p>
-                    {test[0].myex}
+                    {test2[0].myex}
                   </p>
                
                 </div>
@@ -194,8 +205,8 @@ const test = [{
                       <label>About Me</label>
                       <Input
                         className="form-control-alternative"
-                        placeholder={`${test[0].myex}`}
-                        defaultValue={`${test[0].myex}`}
+                        placeholder={`${test2[0].myex}`}
+                        defaultValue={`${test2[0].myex}`}
                         rows="4"
                         type="textarea"
                       />
@@ -211,9 +222,9 @@ const test = [{
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={test[0].statusmessage}
+                            defaultValue={test2[0].statusmessage}
                             id="input-address"
-                            placeholder={test[0].statusmessage}
+                            placeholder={test2[0].statusmessage}
                             type="text"
                           />
                         </FormGroup>
@@ -238,9 +249,9 @@ const test = [{
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue={`${test[0].name}`}
+                            defaultValue={`${test2[0].name}`}
                             id="input-username"
-                            placeholder={`${test[0].name}`}
+                            placeholder={`${test2[0].name}`}
                             type="text"
                             disabled
                           />
@@ -257,8 +268,8 @@ const test = [{
                           <Input
                             className="form-control-alternative"
                             id="input-email"
-                            defaultValue={`${test[0].phone}`}
-                            placeholder={`${test[0].phone}`}
+                            defaultValue={`${test2[0].phone}`}
+                            placeholder={`${test2[0].phone}`}
                             type="email"
                           />
                         </FormGroup>

@@ -1,0 +1,21 @@
+.hoverEffect:hover{
+    animation: LikeClickEffect 0.2s   forwards;
+}
+
+@keyframes LikeClickEffect {
+    0%{
+        transform: scale(0.9);
+        color: transparent;
+    }
+    50%{
+
+        transform: scale(1.2);
+
+        color: rgb(247, 90, 105);
+
+    }
+    100%{
+        transform: scale(1);
+        color: rgb(247, 90, 105);
+    }
+}

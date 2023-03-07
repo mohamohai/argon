@@ -26,14 +26,21 @@ import Icons from "views/examples/Icons.js";
 var routes = [
   {
     path: "/index",
-    name: "Dashboard",
+    name: "이제부터여긴 게시판이야",
     icon: "ni ni-tv-2 text-primary",
     component: Index,
     layout: "/admin"
   },
   {
+    path: "/user-profile",
+    name: "User Profile",
+    icon: "ni ni-single-02 text-yellow",
+    component: Profile,
+    layout: "/admin"
+  },
+  {
     path: "/icons",
-    name: "Icons",
+    name: "아이콘 참고용",
     icon: "ni ni-planet text-blue",
     component: Icons,
     layout: "/admin"
@@ -45,20 +52,23 @@ var routes = [
   //   component: Maps,
   //   layout: "/admin"
   // },
-  {
-    path: "/user-profile",
-    name: "User Profile",
-    icon: "ni ni-single-02 text-yellow",
-    component: Profile,
-    layout: "/admin"
-  },
+ 
   {
     path: "/tables",
-    name: "Tables",
+    name: "친구창 예정",
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
     layout: "/admin"
   },
+  {
+    path: "/tables",
+    name: "etc",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: Tables,
+    layout: "/admin"
+  },
+ 
+  
   {
     path: "/login",
     name: "Login",
