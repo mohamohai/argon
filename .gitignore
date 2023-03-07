@@ -3,3 +3,11 @@
 package-lock.json
 /build
 .eslintcache
+.env
+.jpg
+.png
+.jpeg
+.svg
+.avi
+.mp3
+.mp4
