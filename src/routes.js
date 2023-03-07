@@ -52,7 +52,7 @@ var routes = [
   //   component: Maps,
   //   layout: "/admin"
   // },
- 
+
   {
     path: "/tables",
     name: "친구창 예정",
@@ -67,8 +67,8 @@ var routes = [
     component: Tables,
     layout: "/admin"
   },
- 
-  
+
+
   {
     path: "/login",
     name: "Login",

@@ -392,9 +392,7 @@ const Profile = () => {
                       </Col>
                     </Row>
                   </div>
-
                   {/* Description */}
-
                 </Form>
               </CardBody>
             </Card>
