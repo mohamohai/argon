@@ -99,7 +99,8 @@ const Index = (props) => {
       {/* Page content */}
       <Container className="mt--7 " fluid>
         <Row>
-          <Col xl="10">
+          <Col xl="2"></Col>
+          <Col xl="6">
             {test.map((row, key) => {
               if (row.picsrc.length > 2) {
                 console.log("2개 뽑기")
@@ -135,7 +136,8 @@ const Index = (props) => {
               )
             })}
           </Col>
-          <Col xl="2">
+
+          <Col xl="3">
             asdasd
           </Col>
         </Row>
