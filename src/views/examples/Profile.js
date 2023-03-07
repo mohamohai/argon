@@ -17,6 +17,7 @@
 */
 
 // reactstrap components
+import './Profile.css';
 import {
   Button,
   Card,
@@ -64,20 +65,19 @@ const test = [{
   "age":"28",
   "friend":["accont","bvbbdd","토토로"],
   "write":["나는가끔눈물을흘린다","오늘 저녁은 짜파게티야"],
-  "status message":"i.....want......coffee...",
+  "statusmessage":"i.....want......coffee...",
   "like":"120",
+  "interest":["해시태그용","요리","밥","한식","일식","게임","버튜버","만화","가렌","말자하","갈리오"]
 }]
 
   useEffect(()=>{
     console.log(test[0].name)
     console.log(`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${test[0].profilepic}`)
-
     console.log(test[0].id)
     console.log(test[0].password)
     console.log(test[0].phone)
     console.log(test[0].age)
     console.log(test[0].friend)
-   
    // console.log(test[0].)
   },[])
 
@@ -92,12 +92,14 @@ const test = [{
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
                   <div className="card-profile-image">
+
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <img
                         alt="..."
                         className="rounded-circle"
                         src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${test[0].profilepic}`}
                       />
+                      
                     </a>
                   </div>
                 </Col>
@@ -121,6 +123,7 @@ const test = [{
                     size="sm"
                   >
                     Message
+
                   </Button>
                 </div>
               </CardHeader>
@@ -138,7 +141,7 @@ const test = [{
                       </div>
                       <div>
                         <span className="heading">{test[0].like}</span>
-                        <span className="description">좋아요? 팔로워 등</span>
+                        <span className="description">Like</span>
                       </div>
                    
                     </div>
@@ -153,8 +156,9 @@ const test = [{
                     <i className="ni location_pin " />
                     {test[0]["status message"]}
                   </div>
-                
-               
+                  {test[0].interest.map((row,key)=>{
+                    return(<span className="hashtag"> <a href='#'>#{row}</a></span>)
+                  })}
                   <hr className="my-4" />
                   <p>
                     {test[0].myex}
@@ -184,6 +188,40 @@ const test = [{
                 </Row>
               </CardHeader>
               <CardBody>
+              <h6 className="heading-small text-muted mb-4">About me</h6>
+                  <div className="pl-lg-4">
+                    <FormGroup>
+                      <label>About Me</label>
+                      <Input
+                        className="form-control-alternative"
+                        placeholder={`${test[0].myex}`}
+                        defaultValue={`${test[0].myex}`}
+                        rows="4"
+                        type="textarea"
+                      />
+                    </FormGroup>
+                    <Row>
+                      <Col lg="4">
+                      <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-address"
+                          >
+                            상태 메시지
+                          </label>
+                          <Input
+                            className="form-control-alternative"
+                            defaultValue={test[0].statusmessage}
+                            id="input-address"
+                            placeholder={test[0].statusmessage}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </div>
+                  <hr className="my-4" />
+
                 <Form>
                   <h6 className="heading-small text-muted mb-4">
                     User information
@@ -204,6 +242,7 @@ const test = [{
                             id="input-username"
                             placeholder={`${test[0].name}`}
                             type="text"
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -213,12 +252,13 @@ const test = [{
                             className="form-control-label"
                             htmlFor="input-email"
                           >
-                            Email address
+                            Phone
                           </label>
                           <Input
                             className="form-control-alternative"
                             id="input-email"
-                            placeholder="jesse@example.com"
+                            defaultValue={`${test[0].phone}`}
+                            placeholder={`${test[0].phone}`}
                             type="email"
                           />
                         </FormGroup>
@@ -290,6 +330,7 @@ const test = [{
                         </FormGroup>
                       </Col>
                     </Row>
+                   
                     <Row>
                       <Col lg="4">
                         <FormGroup>
@@ -343,26 +384,14 @@ const test = [{
                       </Col>
                     </Row>
                   </div>
-                  <hr className="my-4" />
+          
                   {/* Description */}
-                  <h6 className="heading-small text-muted mb-4">About me</h6>
-                  <div className="pl-lg-4">
-                    <FormGroup>
-                      <label>About Me</label>
-                      <Input
-                        className="form-control-alternative"
-                        placeholder="A few words about you ..."
-                        rows="4"
-                        defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                        Open Source."
-                        type="textarea"
-                      />
-                    </FormGroup>
-                  </div>
+                
                 </Form>
               </CardBody>
             </Card>
           </Col>
+     
         </Row>
       </Container>
     </>
