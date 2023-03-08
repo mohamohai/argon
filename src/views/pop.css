@@ -16,3 +16,10 @@
         color: rgb(247, 90, 105);
     }
 }
+
+.testModal{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

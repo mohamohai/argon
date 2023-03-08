@@ -31,8 +31,13 @@ import {
   Row,
   Col
 } from "reactstrap";
-
+import { useState,useEffect } from "react";
 const Login = () => {
+
+  const [inid,setinid]=useState("")
+  const [inpw,setinpw]=useState("")
+  //여긴 나중에  axios 같은걸로 로그인만 하면 되는 거 같음
+
   return (
     <>
       <Col lg="5" md="7">
@@ -79,9 +84,9 @@ const Login = () => {
             </div>
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
-            <div className="text-center text-muted mb-4">
+            {/* <div className="text-center text-muted mb-4">
               <small>Or sign in with credentials</small>
-            </div>
+            </div> */}
             <Form role="form">
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
@@ -93,7 +98,8 @@ const Login = () => {
                   <Input
                     placeholder="Email"
                     type="email"
-                    autoComplete="new-email"
+                    autoComplete="email"
+                    onChange={(e)=>{setinid(e.target.value)}}
                   />
                 </InputGroup>
               </FormGroup>
@@ -107,7 +113,8 @@ const Login = () => {
                   <Input
                     placeholder="Password"
                     type="password"
-                    autoComplete="new-password"
+                    autoComplete="password"
+                    onChange={(e)=>{setinpw(e.target.value)}}
                   />
                 </InputGroup>
               </FormGroup>

@@ -60,11 +60,12 @@ const Auth = (props) => {
 
   return (
     <>
-      <div className="main-content" ref={mainContent}>
-        <AuthNavbar />
+      <div className="main-content" ref={mainContent}> 
+      {/* 로그인페이지 상단 메뉴 */}
+        <AuthNavbar /> 
         <div className="header bg-gradient-info py-7 py-lg-8">
           <Container>
-            <div className="header-body text-center mb-7">
+            {/* <div className="header-body text-center mb-7">
               <Row className="justify-content-center">
                 <Col lg="5" md="6">
                   <h1 className="text-white">Welcome!</h1>
@@ -74,7 +75,7 @@ const Auth = (props) => {
                   </p>
                 </Col>
               </Row>
-            </div>
+            </div> 여기가 웰컴어쩌고 문주 있는 곳 */}
           </Container>
           <div className="separator separator-bottom separator-skew zindex-100">
             <svg

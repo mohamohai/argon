@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // node.js library that concatenates classes (strings)
 import classnames from "classnames";
 // javascipt plugin for creating charts
@@ -23,7 +23,7 @@ import Chart from "chart.js";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 
-import './pop.css'
+import "./pop.css";
 // reactstrap components
 import {
   Button,
@@ -40,132 +40,310 @@ import {
   Table,
   Container,
   Row,
-  Col
+  Col,
+  Badge,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
+  DropdownToggle,
+  Media,
+  UncontrolledTooltip,
 } from "reactstrap";
-
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Example from './PicViewer'
 // core components
 import {
   chartOptions,
   parseOptions,
   chartExample1,
-  chartExample2
+  chartExample2,
 } from "variables/charts.js";
 
 import Header from "components/Headers/Header.js";
 
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
-  const [chartExample1Data, setChartExample1Data] = useState("data1");
+  const [chartExample1Data, setChartExample1Data] = useState("data1");  //기본에 있던거라 대기
+  const [ImageModal,setImageModal]=useState(false);  //모달창 대기
+  const [check,setcheck]=useState(480);  //나중에 push나 다른걸로 데이터 넣으면 state를 바꿔줘야 렌더링 되기 때문에 단순 랜더링용 state
+  const [scrollcheck,setscrollcheck]=useState(0)
+  const [data,setdata]=useState([]); //가운데 데이터 관련 항목 데이터 영역
+  const [datahit,setdatahit]=useState(false); //처음에 랜더링 될 때 이걸 삼항연산자용으로 쓰기 때문에 중요 false일 때 스켈레톤 ui나 빈껍데기 몇개 넣을 예정 혹은 최신 데이터 같은거나 기본 데이터들
+  
 
-  const test = [{
-    "time": `${new Date()}`,
-    "content": "여기가 텍스트 영역입니다.",
-    "picsrc": ["para.png"],
-    "title": "제목"
-  },
-  {
-    "time": `${new Date()}`,
-    "content": "여기가 텍스트 영역입니다.",
-    "picsrc": ["city-removebg-preview.png"],
-    "title": "제목"
-  }
-    , {
-    "time": `${new Date()}`,
-    "content": "여기가 텍스트 영역입니다.",
-    "picsrc": ["dotart.gif"],
-    "title": "제목"
-  }
-    , {
-    "time": `${new Date()}`,
-    "content": "여기가 텍스트 영역입니다.",
-    "picsrc": ["ab.jpg", "bc.jpg"],
-    "title": "제목"
+  const [example,setexample]=useState(false)
+
+  function toggleModal(){ //이미지 모달 visible용 함수
+    setexample(!example);
+    console.log(example)
   }
 
-  ]
+  const test = [   // 추후 api로 데이터 가져오는 거 대신해서 임시용으로 쓰는 데이터 항목
+    {
+      time: `${new Date()}`,
+      content: "여기가 텍스트 영역입니다.",
+      picsrc: ["para.png"],
+      title: "제목",
+    },
+    {
+      time: `${new Date()}`,
+      content: "여기가 텍스트 영역입니다.",
+      picsrc: ["city-removebg-preview.png"],
+      title: "제목",
+    },
+    {
+      time: `${new Date()}`,
+      content: "여기가 텍스트 영역입니다.",
+      picsrc: ["dotart.gif"],
+      title: "제목",
+    },
+    {
+      time: `${new Date()}`,
+      content: "여기가 텍스트 영역입니다.",
+      picsrc: ["ab.jpg", "bc.jpg"],
+      title: "제목",
+    },
+    {
+      time: `${new Date()}`,
+      content: "여기가 텍스트 영역입니다.",
+      picsrc: ["짱.jpg"],
+      title: "제목",
+    },
+    {
+      time: `${new Date()}`,
+      content: "여기가 텍스트 영역입니다.",
+      picsrc: ["cd.jpg"],
+      title: "제목",
+    },
+    {
+      time: `${new Date()}`,
+      content: "여기가 텍스트 영역입니다.",
+      picsrc: ["배.jpg"],
+      title: "제목",
+    }
+  ];
 
-  if (window.Chart) {
+  const friend = [ //추후 친구관련 api에 쓸 임시 데이터 항목
+    {
+      name: "악동",
+      pic: "ab.jpg",
+      sound:"뭐라고 우냐 얘는"
+    },
+    {
+      name: "마자용",
+      pic: "마자용.jpg",
+      sound:"마짜아아용"
+    },
+    {
+      name: "유리",
+      pic: "짱.jpg",
+      sound:"사람말 합니다."
+    },
+    {
+      name: "거북왕",
+      pic: "거북왕.jpg",
+      sound:"거부욱"
+    },
+    {
+      name: "푸린",
+      pic: "푸린.jpg",
+      sound:"푸루루푸푸린푸루린푸루루푸푸린푸루린푸루루푸푸린푸루린푸루루푸푸린푸루린푸루루푸푸린푸루린루루푸푸린푸루린푸루루푸푸린푸루린푸루루푸푸린푸루린루루푸푸린푸루린푸루루푸푸린푸루린푸루루푸푸린푸루린루루푸푸린푸루린푸루루푸푸린푸루린푸루루푸푸린푸루린루루푸푸린푸루린푸루루푸푸린푸루린푸루루푸푸린푸루린루루푸푸린푸루린푸루루푸푸린푸루린푸루루푸푸린푸루린"
+    },
+  ];
+
+  if (window.Chart) {  //그..원래 있던거라 
     parseOptions(Chart, chartOptions());
   }
 
-  const toggleNavs = (e, index) => {
+  const toggleNavs = (e, index) => { 
     e.preventDefault();
     setActiveNav(index);
     setChartExample1Data("data" + index);
   };
+
+  function testarrpush (){ //맨 아래로 스크롤 할 경우 추가로 데이터를 들여올 때 쓰여지는 항목 set
+    const arr = {
+      time: `${new Date()}`,
+      content: "새로 추가 된 데이터입니다.",
+      picsrc: ["arrpush.png"],
+      title: "새로 추가 이하 생략",
+    }
+    const arr2 = {
+      time: `${new Date()}`,
+      content: "새로 추가 된 데이터입니다.",
+      picsrc: ["arrpush.png"],
+      title: check,
+    }
+    
+    // test.push(arr);
+    // data.push(arr)
+
+    
+    // console.log("") 이게 바닐라버전..?
+    setcheck(check=>check+1)  //이게 react 버전
+    setdata((data)=>[...data,arr2])  //이게 react 버전
+
+
+  }
+
+
+  const handleScroll = () => {
+    const scrollHeight = document.documentElement.scrollHeight; //doc height
+    const scrollTop    = document.documentElement.scrollTop; //내위치 이거는 계속 바뀜
+    const clientHeight = document.documentElement.clientHeight; //대충 클라규격 height
+ 
+   
+    if (scrollTop + clientHeight >= scrollHeight) {
+      testarrpush();
+    }
+    setscrollcheck(check+1)
+  };
+
+  function canimg(arr){
+    arr.map((row,key)=>{
+      console.log(row)
+    })
+  }
+
+  
+
+  
+  useEffect(()=>{
+    setdata(test);
+    setdatahit(true);
+
+
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  },[])
   return (
-    <>
+    <> 
       <Header />
+      <Button
+          color="primary"
+          type="button"
+          onClick={() =>toggleModal()}
+      >
+          Launch demo modal
+      </Button>
+      <Modal
+      
+          className="modal-dialog-centered transparent-modal fullscreen"
+          isOpen={example}
+          toggle={() =>toggleModal()}
+          size="xl"
+          style={{backgroundColor:"transparent"}}
+          fade={true}
+          //xl=1200
+          fullscreen="true"
+      >
+        <div className="modal-header">
+          <h5 className="modal-title" id="exampleModalLabel">
+            Username
+          </h5>
+        </div>
+        <div className="modal-body testModal" >
+          <img src="http://placehold.it/600x600"></img>
+        </div>
+          
+      </Modal>
+
+
+
+
+      <Example 
+        imageSrc="https://via.placeholder.com/1080/FFFF00/000000"
+        arrtest={["ab.jpg","bc.jpg"]}
+      />
+      
       {/* Page content */}
       <Container className="mt--7 " fluid>
+        <div style={{position:"fixed",top:"50px"}}>{check}</div>
         <Row>
           <Col xl="2"></Col>
           <Col xl="6">
-            {test.map((row, key) => {
+            {datahit? data.map((row, key) => {
               if (row.picsrc.length > 2) {
-                console.log("2개 뽑기")
+                console.log("2개 뽑기");
               }
-              console.log(row)
               return (
-                <Col className="mb-5 mb-xl-0 " xl="12"> {/*이거 크기 조절인데 어케할지 생각해보자 크게크게해서 안에 이미지를 줄이는게 낫나 아니면 보통사이즈로해서 최대한 덜 쪼개지게 하는게 맞나*/}
-                  <Card className="my-2 shadow">
+                <Col className="mb-5 mb-xl-0 " xl="12" key={key}>
+                  {" "}
+                  {/*이거 크기 조절인데 어케할지 생각해보자 크게크게해서 안에 이미지를 줄이는게 낫나 아니면 보통사이즈로해서 최대한 덜 쪼개지게 하는게 맞나*/}
+                  <Card className="my-2 bg-secondary shadow border-1">
+                    {canimg(row.picsrc)}
                     <CardImg
                       alt="Card image cap"
                       src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${row.picsrc[0]}`}
                       style={{
-                        width: '100%',
+                        width: "100%",
                       }}
                     />
+                    
                     <CardBody>
                       <CardTitle tag="h5">
                         Card Title
                         {row.title}
                       </CardTitle>
+                      <CardText>{row.content}</CardText>
                       <CardText>
-                        {row.content}
-                      </CardText>
-                      <CardText>
-                        <small className="text-muted">
-                          {row.time}
-                        </small>
+                        <small className="text-muted">{row.time}</small>
                       </CardText>
                       <i className="ni ni-favourite-28 hoverEffect"></i>
                     </CardBody>
                   </Card>
                 </Col>
-              )
-            })}
+              );
+            }):"스켈레톤 준비! 악!"}
+            
           </Col>
-
-          <Col xl="3">
+          <Col xl="1"></Col>
+          <Col
+            xl="3"
+            className="position-fixed d-none d-xl-block"
+            style={{ right: "0px", bottom: "10px" ,backgroundColor:"red"}}
+          >
             <Row>
-              ㅁㄴㅇ
+              추가로 뭘 넣을 영역
             </Row>
             <Row>
-              ㅁㄴㅇ
+              <Table borderless>
+                <tbody>
+                  {friend.map((row, key) => {
+                    return (
+                      <tr key={key}>
+                        <td>
+                          <Media className="align-items-center"
+                       >
+                          <a
+                            className="avatar rounded-circle mr-3"
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <img
+                              alt="..."
+                              src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${row.pic}`}
+                              style={{width:"50px",maxHeight:"50px"}}
+                            />
+                          </a>
+                          <div className="media-body" style={{overflow:"hidden",textOverflow:"ellipsis"}}>
+                          <h5 className="mt-0">{row.name}</h5>
+                          {row.sound}
+                          </div>
+                          
+                          </Media>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
             </Row>
           </Col>
         </Row>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         {/* 
-
         <Row>
           <Col className="mb-5 mb-xl-0 " xl="8">
             <Card className="bg-gradient-default shadow">
@@ -430,9 +608,6 @@ const Index = (props) => {
             </Card>
           </Col>
         </Row> */}
-
-
-
       </Container>
     </>
   );
