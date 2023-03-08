@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // node.js library that concatenates classes (strings)
 import classnames from "classnames";
 // javascipt plugin for creating charts
@@ -82,6 +82,8 @@ const Index = (props) => {
       <Modal
         {...props}
         size="xl"
+        animation="false"
+        
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -222,6 +224,13 @@ const Index = (props) => {
     setChartExample1Data("data" + index);
   };
 
+  const buttonRefs = useRef([]);
+
+  
+    const likeClick = (key) => {
+      console.log( buttonRefs.current)
+      buttonRefs.current[key].classList.toggle('likeafter');
+    };
   function testarrpush() {
     //맨 아래로 스크롤 할 경우 추가로 데이터를 들여올 때 쓰여지는 항목 set
     const arr = {
@@ -310,7 +319,7 @@ const Index = (props) => {
                           <i className="ni ni-favourite-28 hoverEffect likeafter"></i>
    //classList.toggle 로 데이터 넣줬해서 하는
                            :
-                          <i onClick={()=>like} className="ni ni-favourite-28 hoverEffect"></i>
+                          <i onClick={()=>likeClick(key)} className="ni ni-favourite-28 "></i>
                            }
                         </CardBody>
                       </Card>
