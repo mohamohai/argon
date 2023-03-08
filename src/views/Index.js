@@ -138,7 +138,12 @@ const Index = (props) => {
           </Col>
 
           <Col xl="3">
-            asdasd
+            <Row>
+              ㅁㄴㅇ
+            </Row>
+            <Row>
+              ㅁㄴㅇ
+            </Row>
           </Col>
         </Row>
 
