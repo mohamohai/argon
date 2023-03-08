@@ -35,7 +35,7 @@ import { useEffect,useState } from "react";
 const Register = () => {
   const [inid,setinid]=useState('');
   const [inpw,setinpw]=useState('');
-  const [inpw2,setinpw2]=useState('');
+  const [inpw2,setinpw2]=useState('oh hi');
 
   const [inbirth,setinbirth]=useState('')
   const [age,setage]=useState('')
