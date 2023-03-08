@@ -1,7 +1,10 @@
 .hoverEffect:hover{
-    animation: LikeClickEffect 0.2s   forwards;
+    animation: LikeClickEffect 0.1s   forwards;
 }
 
+.likeafter{
+    animation: LikeClickEffect 0.1s   forwards linear;
+}
 @keyframes LikeClickEffect {
     0%{
         transform: scale(0.9);
@@ -17,11 +20,15 @@
     }
 }
 
+
 .testModal{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+.testModal img{
+    max-width: 100%;
 }
 
 .testModal span{

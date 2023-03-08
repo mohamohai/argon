@@ -101,7 +101,6 @@ const Index = (props) => {
             </span>
             <div>
               <img
-                style={{ objectFit: "cover" }}
                 onClick={() => setModalShow(false)}
                 src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${imgarr[imgarrcnt]}`}
               ></img>
@@ -133,17 +132,13 @@ const Index = (props) => {
 
   const test = [
     // 추후 api로 데이터 가져오는 거 대신해서 임시용으로 쓰는 데이터 항목
-    {
-      time: `${new Date()}`,
-      content: "여기가 텍스트 영역입니다.",
-      picsrc: ["para.png"],
-      title: "제목",
-    },
+   
     {
       time: `${new Date()}`,
       content: "여기가 텍스트 영역입니다.",
       picsrc: ["mybg.jpg", "city-removebg-preview.png"],
       title: "제목",
+      like:"good"
     },
     {
       time: `${new Date()}`,
@@ -156,6 +151,13 @@ const Index = (props) => {
       content: "여기가 텍스트 영역입니다.",
       picsrc: ["ab.jpg", "bc.jpg", "짱.jpg", "cd.jpg"],
       title: "제목",
+    },
+    {
+      time: `${new Date()}`,
+      content: "https://kr.freepik.com/free-photo/beautiful-tree-in-the-middle-of-a-field-covered-with-grass-with-the-tree-line-in-the-background_13005861.htm#query=nature%20background&position=4&from_view=keyword&track=ais  와   https://kr.freepik.com/free-photo/nature-product-backdrop-green-trees-and-sunlight_19139052.htm#query=nature%20background&position=12&from_view=keyword&track=ais 작가 rawpixel.com",
+      picsrc: ["나무.jpg", "나무나무.jpg", "짱.jpg", "cd.jpg"],
+      title: "제목",
+      
     },
     {
       time: `${new Date()}`,
@@ -176,6 +178,8 @@ const Index = (props) => {
       title: "제목",
     },
   ];
+
+
 
   const friend = [
     //추후 친구관련 api에 쓸 임시 데이터 항목
@@ -302,7 +306,12 @@ const Index = (props) => {
                           <CardText>
                             <small className="text-muted">{row.time}</small>
                           </CardText>
-                          <i className="ni ni-favourite-28 hoverEffect"></i>
+                          {row.like==="good"? 
+                          <i className="ni ni-favourite-28 hoverEffect likeafter"></i>
+   //classList.toggle 로 데이터 넣줬해서 하는
+                           :
+                          <i onClick={()=>like} className="ni ni-favourite-28 hoverEffect"></i>
+                           }
                         </CardBody>
                       </Card>
                     </Col>
