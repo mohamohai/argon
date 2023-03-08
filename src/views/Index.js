@@ -26,7 +26,7 @@ import { Line, Bar } from "react-chartjs-2";
 import "./pop.css";
 // reactstrap components
 import {
-  Button,
+
   Card,
   CardHeader,
   CardBody,
@@ -49,8 +49,8 @@ import {
   Media,
   UncontrolledTooltip,
 } from "reactstrap";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import Example from './PicViewer'
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 // core components
 import {
   chartOptions,
@@ -71,12 +71,67 @@ const Index = (props) => {
   const [datahit,setdatahit]=useState(false); //처음에 랜더링 될 때 이걸 삼항연산자용으로 쓰기 때문에 중요 false일 때 스켈레톤 ui나 빈껍데기 몇개 넣을 예정 혹은 최신 데이터 같은거나 기본 데이터들
   
 
-  const [example,setexample]=useState(false)
+  const [modalShow, setModalShow] =useState(false);
+  const [imgarr,setimgarr]=useState([]);
+  const [imgarrcnt,setimgarrcnt]=useState(0);
 
-  function toggleModal(){ //이미지 모달 visible용 함수
-    setexample(!example);
-    console.log(example)
+
+  function imgarrin(inarr){
+
+    setimgarr(inarr)
+    console.log(inarr)
+    console.log(imgarr)
+    setModalShow(true)
   }
+  function MyVerticallyCenteredModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="xl"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Modal heading
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div  className="testModal">
+          <span onClick={()=>{goPrev(imgarr)}}>abc</span>
+          <div>
+            <img style={{objectFit:"cover"}} onClick={()=>setModalShow(false)} src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${imgarr[imgarrcnt]}`}></img>
+          </div>
+          <span onClick={()=>gonext(imgarr)}>ab</span>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
+    function goPrev(arrL){
+      console.log(arrL.length)
+      console.log(imgarrcnt)
+      if(imgarrcnt < arrL.length-1){
+        setimgarrcnt(imgarrcnt+1)
+      }else{
+        setimgarrcnt(0)
+      }
+    } 
+function gonext(arrL){
+  console.log(arrL.length)
+  console.log(imgarrcnt)
+  if(imgarrcnt < arrL.length-1){
+    setimgarrcnt(imgarrcnt+1)
+  }else{
+    setimgarrcnt(0)
+  }
+}
+
+  const [example,setexample]=useState(false)
 
   const test = [   // 추후 api로 데이터 가져오는 거 대신해서 임시용으로 쓰는 데이터 항목
     {
@@ -88,7 +143,7 @@ const Index = (props) => {
     {
       time: `${new Date()}`,
       content: "여기가 텍스트 영역입니다.",
-      picsrc: ["city-removebg-preview.png"],
+      picsrc: ["mybg.jpg","city-removebg-preview.png"],
       title: "제목",
     },
     {
@@ -199,11 +254,6 @@ const Index = (props) => {
     setscrollcheck(check+1)
   };
 
-  function canimg(arr){
-    arr.map((row,key)=>{
-      console.log(row)
-    })
-  }
 
   
 
@@ -211,51 +261,27 @@ const Index = (props) => {
   useEffect(()=>{
     setdata(test);
     setdatahit(true);
-
-
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   },[])
+  
   return (
     <> 
-      <Header />
-      <Button
-          color="primary"
-          type="button"
-          onClick={() =>toggleModal()}
-      >
-          Launch demo modal
-      </Button>
-      <Modal
-      
-          className="modal-dialog-centered transparent-modal fullscreen"
-          isOpen={example}
-          toggle={() =>toggleModal()}
-          size="xl"
-          style={{backgroundColor:"transparent"}}
-          fade={true}
-          //xl=1200
-          fullscreen="true"
-      >
-        <div className="modal-header">
-          <h5 className="modal-title" id="exampleModalLabel">
-            Username
-          </h5>
-        </div>
-        <div className="modal-body testModal" >
-          <img src="http://placehold.it/600x600"></img>
-        </div>
-          
-      </Modal>
+  <Header></Header>
 
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() =>{
+          setModalShow(false)
+          setimgarrcnt(0)
+        }}
+      />
 
-
-
+{/* 
       <Example 
         imageSrc="https://via.placeholder.com/1080/FFFF00/000000"
         arrtest={["ab.jpg","bc.jpg"]}
-      />
+      /> */}
       
       {/* Page content */}
       <Container className="mt--7 " fluid>
@@ -272,13 +298,14 @@ const Index = (props) => {
                   {" "}
                   {/*이거 크기 조절인데 어케할지 생각해보자 크게크게해서 안에 이미지를 줄이는게 낫나 아니면 보통사이즈로해서 최대한 덜 쪼개지게 하는게 맞나*/}
                   <Card className="my-2 bg-secondary shadow border-1">
-                    {canimg(row.picsrc)}
+                    
                     <CardImg
                       alt="Card image cap"
                       src={`https://jonghyunportfolio.s3.ap-northeast-2.amazonaws.com/${row.picsrc[0]}`}
                       style={{
                         width: "100%",
                       }}
+                      onClick={()=>imgarrin(row.picsrc)}
                     />
                     
                     <CardBody>
@@ -302,7 +329,7 @@ const Index = (props) => {
           <Col
             xl="3"
             className="position-fixed d-none d-xl-block"
-            style={{ right: "0px", bottom: "10px" ,backgroundColor:"red"}}
+            style={{ right: "0px", bottom: "10px" }}
           >
             <Row>
               추가로 뭘 넣을 영역
